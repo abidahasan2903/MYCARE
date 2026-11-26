@@ -1,6 +1,6 @@
 {
   "name": "MYCARE",
-  "description": "MYCARE - Offline-first personal healthcare and daily life management application in English and Bangla.",
+  "description": "MYCARE is an offline-first Android app for personal health, wellness, and everyday life management in English and Bangla.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

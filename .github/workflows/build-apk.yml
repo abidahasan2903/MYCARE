@@ -1,0 +1,75 @@
+name: Build and release MYCARE APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mycare-latest-release
+  cancel-in-progress: false
+
+jobs:
+  build-release:
+    name: Build and publish Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+
+      - name: Install Android SDK packages
+        run: sdkmanager "platforms;android-36.1" "build-tools;36.1.0"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Build installable debug APK
+        env:
+          APP_VERSION_CODE: ${{ github.run_number }}
+          APP_VERSION_NAME: 1.0.${{ github.run_number }}
+        run: ./gradlew --no-daemon -PmycareVersionCode="$((100000 + APP_VERSION_CODE))" -PmycareVersionName="$APP_VERSION_NAME" assembleDebug
+
+      - name: Prepare release APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/MYCARE.apk
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: mycare-apk
+          path: app/build/outputs/apk/debug/MYCARE.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Move the rolling latest tag to this commit
+        run: |
+          git tag --force latest "$GITHUB_SHA"
+          git push --force origin refs/tags/latest
+
+      - name: Publish APK to the latest GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: latest
+          target_commitish: ${{ github.sha }}
+          name: MYCARE latest
+          body: |
+            Installable Android debug build for commit `${{ github.sha }}`.
+
+            Download `MYCARE.apk`, install it on Android, and open MYCARE. Local app data is stored on the device; export a backup before uninstalling an existing installation.
+          files: app/build/outputs/apk/debug/MYCARE.apk
+          overwrite_files: true
+          fail_on_unmatched_files: true
+          make_latest: true
+          draft: false
+          prerelease: false
