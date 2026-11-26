@@ -356,6 +356,9 @@ class ExampleRobolectricTest {
         composeRule.waitForIdle()
         composeRule.onNodeWithText("My Wallet").assertIsDisplayed()
         composeRule.onNodeWithTag("tab_wallet_overview").assertIsDisplayed()
+        composeRule.onNodeWithTag("top_bar_back").performClick()
+        composeRule.waitForIdle()
+        composeRule.onNodeWithTag("dashboard_list").assertIsDisplayed()
     }
 
     @Test

@@ -305,7 +305,14 @@ private fun MyCareNavGraph(
 
         composable<MyCareRoute.Wallet> {
             val vm = provideViewModel { WalletViewModel(container.walletRepository) }
-            WalletScreen(viewModel = vm)
+            WalletScreen(
+                viewModel = vm,
+                onBack = {
+                    if (!navController.popBackStack()) {
+                        navController.navigate(MyCareRoute.Home) { launchSingleTop = true }
+                    }
+                }
+            )
         }
 
         composable<MyCareRoute.HealthHub> {

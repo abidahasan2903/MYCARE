@@ -79,7 +79,8 @@ import java.text.DateFormatSymbols
 
 @Composable
 fun WalletScreen(
-    viewModel: WalletViewModel
+    viewModel: WalletViewModel,
+    onBack: () -> Unit = {}
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     var selectedTab by remember { mutableIntStateOf(0) } // 0 = Overview, 1 = Transactions, 2 = Calculator
@@ -88,7 +89,7 @@ fun WalletScreen(
     var txToDelete by remember { mutableStateOf<FinanceTransactionEntity?>(null) }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        MyCareTopBar(title = stringResource(R.string.feature_wallet_title))
+        MyCareTopBar(title = stringResource(R.string.feature_wallet_title), onBack = onBack)
         ScrollableTabRow(
             selectedTabIndex = selectedTab,
             edgePadding = 12.dp,
