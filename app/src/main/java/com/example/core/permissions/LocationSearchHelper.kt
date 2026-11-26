@@ -1,9 +1,14 @@
 package com.example.core.permissions
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
+import androidx.core.content.ContextCompat
 
 data class ManualLocationInput(
     val district: String = "",
@@ -49,13 +54,10 @@ object LocationSearchHelper {
     ): Boolean {
         var lat: Double? = null
         var lng: Double? = null
-        if (useCurrentLocation && PermissionManager.hasLocationPermission(context)) {
-            runCatching {
-                val lm = context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
-                val loc = lm?.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-                    ?: lm?.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                lat = loc?.latitude
-                lng = loc?.longitude
+        if (useCurrentLocation) {
+            lastKnownLocation(context)?.let { location ->
+                lat = location.latitude
+                lng = location.longitude
             }
         }
 
@@ -120,5 +122,34 @@ object LocationSearchHelper {
             context.startActivity(intent)
             true
         }.getOrDefault(false)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun lastKnownLocation(context: Context): Location? {
+        val coarseGranted = ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+        val fineGranted = ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+        if (!coarseGranted && !fineGranted) return null
+
+        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
+            ?: return null
+        val providers = buildList {
+            if (coarseGranted || fineGranted) add(LocationManager.NETWORK_PROVIDER)
+            if (fineGranted) add(LocationManager.GPS_PROVIDER)
+        }
+        return providers.firstNotNullOfOrNull { provider ->
+            try {
+                locationManager.getLastKnownLocation(provider)
+            } catch (_: SecurityException) {
+                null
+            } catch (_: IllegalArgumentException) {
+                null
+            }
+        }
     }
 }
