@@ -1,0 +1,2299 @@
+MYCARE — Complete Android Application Development Master Prompt
+
+PROJECT IDENTITY
+
+App Name: MYCARE
+Tagline: Your Personal Assistant. 
+Developer Credit: Developed by @Abid Ahasan
+Platform: Android
+Development Environment: Google AI Studio
+Programming Language: Kotlin
+UI Framework: Jetpack Compose
+Architecture: MVVM + Clean Architecture
+Database: Room Database (SQLite)
+Preferences: DataStore
+Internet: Required only for online search and external information.
+AI Integration: Strictly Prohibited — No AI, No AI API, No AI SDK.
+
+---
+
+1. YOUR PRIMARY RESPONSIBILITY
+
+Act as a senior Android application architect, professional UI/UX designer, Kotlin developer, database engineer, and software tester.
+
+Your responsibility is to DESIGN, DEVELOP, IMPLEMENT, AND COMPLETE a fully functional Android application named MYCARE.
+
+This must be a real Android application, not a UI prototype, demonstration, or frontend-only project.
+
+Develop all application screens, features, database operations, navigation, reminders, media management, settings, and business logic.
+
+Every feature must have a working interface and proper backend implementation.
+
+Do not leave:
+
+- Dummy buttons.
+- Placeholder screens.
+- Incomplete functionality.
+- Fake statistics.
+- Simulated database operations.
+- Unfinished navigation.
+- TODO comments representing missing functionality.
+
+If the complete application is too large for one generation, develop it in structured phases. Maintain the same architecture, database structure, design system, and previously completed code throughout all phases.
+
+Do not replace working modules unnecessarily.
+
+The final objective is a complete, polished, reliable, offline-first personal healthcare and daily life management application.
+
+---
+
+2. IMPORTANT APPLICATION RULES
+
+Follow these rules throughout development.
+
+1. No login or registration system.
+2. No authentication system.
+3. No PIN, password, biometric lock, or app-lock functionality.
+4. No AI integration of any kind.
+5. No AI-generated medical advice.
+6. No preloaded personal records.
+7. No fake doctor or hospital information.
+8. No fabricated medicine information.
+9. No fake financial statistics.
+10. No unnecessary permissions.
+11. No automatic uploading of personal information.
+12. No unnecessary Quick Actions on the dashboard.
+13. No Water Tracker.
+14. No Sleep Tracker.
+15. No GitHub repository creation or publishing workflow.
+16. All personal records must remain locally stored by default.
+
+The application must open directly without any authentication or security screen.
+
+---
+
+3. APPLICATION STARTUP AND FIRST-LAUNCH WORKFLOW
+
+This section is extremely important.
+
+The first screen of MYCARE must be a clean, beautiful Language Selection screen.
+
+Do not show a splash-based onboarding sequence that requires multiple steps, login, registration, or personal information.
+
+A. First Launch — Language Selection
+
+When the user opens MYCARE for the first time, display a premium language selection screen.
+
+Title:
+
+Welcome to MYCARE
+
+Subtitle:
+
+Your Health. Your Life. Your Everything.
+
+Provide two large, elegant language options:
+
+1. English
+2. বাংলা
+
+Each option should have:
+
+- Language name.
+- Appropriate language representation.
+- Clear selection indicator.
+
+Include a Continue button.
+
+Workflow
+
+When the user selects English:
+
+- Save English as the application language.
+- Navigate directly to the Home Dashboard.
+
+When the user selects বাংলা:
+
+- Save Bangla as the application language.
+- Navigate directly to the Home Dashboard.
+
+Do not display another onboarding screen after language selection.
+
+B. Returning Users
+
+After the first language selection:
+
+- Open the application directly on the Home Dashboard.
+- Do not show the language selection screen again.
+- Preserve the selected language after app restart.
+
+Users can change the language anytime from Settings.
+
+C. No Authentication
+
+The application must never ask for:
+
+- Email.
+- Phone number.
+- Password.
+- Username.
+- Account creation.
+- Login credentials.
+
+Open the dashboard directly.
+
+---
+
+4. MAIN APPLICATION NAVIGATION
+
+Create a professional bottom navigation bar containing exactly five primary destinations.
+
+1. Home
+2. Wallet
+3. Health
+4. Memory
+5. Settings
+
+Use premium icons, proper selected states, and smooth navigation transitions.
+
+The navigation bar must remain consistent throughout the application.
+
+A. Home
+
+The main dashboard and application overview.
+
+B. Wallet
+
+Direct access to My Wallet and all financial management features.
+
+C. Health
+
+Access to healthcare, medicine, exercise, medical records, doctor search, and nutrition.
+
+D. Memory
+
+Access to personal notes, albums, and voice recordings.
+
+E. Settings
+
+Centralized settings for the entire application.
+
+Navigation Requirements
+
+- Use Navigation Compose.
+- Maintain proper back navigation.
+- Preserve screen states where appropriate.
+- Prevent duplicate destinations.
+- Keep navigation smooth.
+- Use proper nested navigation for feature details.
+- Ensure every feature can be accessed easily.
+
+---
+
+5. BRANDING AND DESIGN SYSTEM
+
+Create a unique, uncommon, elegant, premium visual identity for MYCARE.
+
+The interface should feel like a professionally developed healthcare and personal life management application.
+
+Design Direction
+
+- Minimalist.
+- Sophisticated.
+- Modern.
+- Premium.
+- Professional.
+- Clean card-based interface.
+- Beautiful typography.
+- Balanced spacing.
+- Consistent iconography.
+- Smooth transitions.
+- Subtle animations.
+- Clear visual hierarchy.
+
+Avoid:
+
+- Childish designs.
+- Excessive gradients.
+- Overcrowded layouts.
+- Unnecessary decorations.
+- Inconsistent colors.
+- Oversized buttons.
+- Excessive shadows.
+
+Color Palette
+
+Primary:
+
+- Premium Teal.
+- Deep Emerald.
+
+Secondary:
+
+- Soft Mint.
+- Light Green.
+
+Light Theme:
+
+- Background: Soft White / Light Neutral.
+- Surface: Clean White.
+- Primary Text: Deep Charcoal.
+- Secondary Text: Muted Gray.
+
+Dark Theme:
+
+- Background: Deep Charcoal.
+- Surface: Dark Emerald / Dark Neutral.
+- Primary Text: Soft White.
+- Secondary Text: Muted Gray.
+
+Design Requirements
+
+1. Consistent corner radius.
+2. Appropriate card spacing.
+3. Responsive layouts.
+4. Proper typography hierarchy.
+5. Readable labels.
+6. Proper icon alignment.
+7. Consistent button dimensions.
+8. Smooth scrolling.
+9. Appropriate loading indicators.
+10. Beautiful empty states.
+11. Clear error messages.
+12. Proper dialog and bottom-sheet sizing.
+
+Support small, medium, and large Android displays.
+
+Never allow overlapping components, clipped text, or horizontal overflow.
+
+---
+
+6. HOME DASHBOARD
+
+Create a premium, informative, and visually balanced Home Dashboard.
+
+The dashboard must display the application's primary features in a clear, organized, sequential layout.
+
+Do not add Quick Actions.
+
+Do not add a large collection of shortcut buttons.
+
+Each primary feature must be represented by its own beautiful feature card or section.
+
+A. Dashboard Header
+
+At the top, display:
+
+- MYCARE branding.
+- Time-dependent greeting.
+- Current date.
+- A subtle profile-free application identity area.
+
+Dynamic Greeting
+
+The greeting must automatically change according to the device's local time.
+
+Examples:
+
+- Good Morning
+- Good Afternoon
+- Good Evening
+- Good Night
+
+For Bangla:
+
+- সুপ্রভাত
+- শুভ অপরাহ্ণ
+- শুভ সন্ধ্যা
+- শুভ রাত্রি
+
+Update the greeting according to the current time.
+
+Do not hardcode one greeting.
+
+B. Main Feature List
+
+Display the following features in this exact order:
+
+1. My Medicine
+2. Exercise Planner
+3. Add Task
+4. My Wallet
+5. Grocery & Shopping
+6. My Medical Records
+7. Doctor Search
+8. Nutrition Guide
+
+Each feature must have:
+
+- A premium icon.
+- Feature title.
+- Short description.
+- Elegant visual representation.
+- Clear navigation interaction.
+
+Clicking a feature card must open its complete corresponding module.
+
+Use a consistent card design without making the dashboard overcrowded.
+
+C. Dashboard Information Sections
+
+Below the main feature cards, optionally display useful information based on actual local database records.
+
+Examples:
+
+- Upcoming Medicine.
+- Upcoming Exercise.
+- Upcoming Tasks.
+- Pending Grocery Items.
+- Recent Medical Records.
+- Monthly Wallet Summary.
+- Upcoming Nutrition Schedules.
+
+Only show relevant sections when appropriate.
+
+Never show fabricated information.
+
+If there is no data, show a compact, attractive empty state.
+
+All dashboard information must be retrieved from the Room Database.
+
+---
+
+7. CENTRALIZED REMINDER AND NOTIFICATION SYSTEM
+
+Build one centralized reminder and notification engine for the entire application.
+
+This system must support:
+
+- Medicine reminders.
+- Exercise reminders.
+- Task reminders.
+- Grocery reminders.
+- Appointment reminders.
+- Nutrition reminders.
+- Travel reminders.
+- Bill reminders.
+- Other scheduled activities.
+
+Do not implement separate, inconsistent reminder engines for different features.
+
+A. Reminder Creation
+
+Allow users to configure:
+
+- Reminder title.
+- Description.
+- Date.
+- Time.
+- One-time reminder.
+- Daily repeat.
+- Weekly repeat.
+- Custom repeat.
+- Specific weekdays.
+- Enable/disable.
+- Sound on/off.
+- Vibration on/off.
+- Notification on/off.
+- Snooze duration.
+
+B. Custom Ringtone
+
+Allow users to select audio files from their device.
+
+Supported examples:
+
+- MP3.
+- WAV.
+- M4A.
+- Other Android-supported audio formats.
+
+Provide:
+
+- Browse audio.
+- Select ringtone.
+- Preview ringtone.
+- Stop preview.
+- Set default ringtone.
+- Set individual ringtone.
+- Remove custom ringtone.
+- Use system notification sound.
+
+Store audio using a persistent content URI or app-private storage.
+
+Never depend on temporary file paths.
+
+C. Ringing Duration
+
+Provide these options:
+
+- 10 seconds.
+- 30 seconds.
+- 1 minute.
+- 2 minutes.
+- 5 minutes.
+
+Automatically stop reminder audio after the selected duration.
+
+Allow immediate dismissal.
+
+D. Snooze
+
+Provide:
+
+- 5 minutes.
+- 10 minutes.
+- 15 minutes.
+
+Reschedule the reminder properly after snoozing.
+
+E. Technical Implementation
+
+Use:
+
+- AlarmManager for appropriate exact reminders.
+- WorkManager for flexible background tasks.
+- NotificationManager.
+- Notification channels.
+- BroadcastReceiver.
+- Boot recovery receiver.
+- Proper Android scheduling APIs.
+
+Handle:
+
+- Device reboot.
+- App updates.
+- Android version restrictions.
+- Exact alarm permissions.
+- Notification permission.
+- Battery optimization restrictions.
+
+Do not repeatedly request the same permission.
+
+Request permission only when the related functionality is first used.
+
+If permission is denied, show a clear explanation and provide a settings shortcut when appropriate.
+
+Store all reminder configurations in Room Database.
+
+---
+
+8. PERMISSION MANAGEMENT
+
+Permission handling must be centralized across the entire application.
+
+This is a mandatory requirement.
+
+Do not request all permissions when the application starts.
+
+Do not repeatedly request the same permission whenever the user opens a feature.
+
+A. Contextual Permission Requests
+
+Examples:
+
+File upload:
+
+- Request file selection through Android Storage Access Framework.
+- Use Android Photo Picker for photos and videos.
+
+Voice recording:
+
+- Request microphone permission only when recording begins.
+
+Location:
+
+- Request location only when the user chooses nearby search.
+
+Notifications:
+
+- Request notification permission when the user first configures a reminder or notification-dependent feature.
+
+Exact alarms:
+
+- Request special exact-alarm access only when necessary.
+
+B. Permission Persistence
+
+Use Android's supported permission and URI-grant mechanisms.
+
+Where a permission can be retained, retain it appropriately.
+
+For example:
+
+- Persist URI permissions for selected files where supported.
+- Store reusable file references.
+- Use centralized permission management.
+- Avoid asking again for already granted permissions.
+
+Important technical clarification:
+
+Android does not allow applications to permanently approve every permission through one universal approval.
+
+Therefore, implement the most user-friendly approach supported by Android.
+
+Do not request permissions unnecessarily.
+
+If a permission is revoked from Android Settings, handle it gracefully and request it again only when the user needs that feature.
+
+---
+
+9. MY MEDICINE
+
+Create a complete medicine management module.
+
+Separate it into two main sections.
+
+A. My Medicine List
+
+Users must be able to add their own medicines.
+
+Fields:
+
+- Medicine name.
+- Strength.
+- Medicine type.
+- Dosage instructions.
+- Start date.
+- End date.
+- Prescribed by.
+- Notes.
+- Optional image.
+- Optional document.
+
+Features:
+
+- Add medicine.
+- Edit medicine.
+- Delete medicine.
+- Search medicine.
+- View medicine details.
+- Active medicines.
+- Completed medicines.
+- Medicine history.
+
+Never automatically prescribe medicines.
+
+Dosage instructions must be entered by the user based on professional medical advice.
+
+B. Medicine Schedule
+
+Allow configuration of:
+
+- Morning.
+- Afternoon.
+- Evening.
+- Night.
+- Before meal.
+- After meal.
+- Custom time.
+- Multiple daily doses.
+
+Schedule options:
+
+- One-time.
+- Daily.
+- Weekly.
+- Custom repeat.
+- Start date.
+- End date.
+- Reminder time.
+- Custom ringtone.
+- Ringing duration.
+- Snooze.
+- Vibration.
+- Notification.
+
+C. Medicine Tracking
+
+For every scheduled dose, provide:
+
+- Taken.
+- Skipped.
+- Snoozed.
+- Pending.
+
+Save dose history with actual date and time.
+
+Never automatically mark a medicine as taken.
+
+Show daily and weekly adherence using actual records.
+
+---
+
+10. EXERCISE PLANNER
+
+Build a complete personal Exercise Planner.
+
+The user must be able to create unlimited custom exercises using their own exercise names.
+
+A. Exercise List
+
+Display all user-created exercises.
+
+Provide:
+
+- Search.
+- Category filters.
+- Active exercises.
+- Completed exercises.
+- Exercise details.
+
+Each exercise must have its own dedicated detail page.
+
+B. Create Exercise
+
+Fields:
+
+- Exercise name.
+- Category.
+- Description.
+- Exercise instructions.
+- Duration.
+- Sets.
+- Repetitions.
+- Rest time.
+- Difficulty level.
+- Start date.
+- Schedule.
+- Personal notes.
+
+C. Exercise Media and Attachments
+
+This requirement is mandatory.
+
+For each exercise, users must be able to upload one or multiple files.
+
+Supported content:
+
+- Photos.
+- Videos.
+- PDFs.
+- Documents.
+- Other supported files.
+
+Examples:
+
+- Exercise demonstration video.
+- Correct posture photograph.
+- PDF exercise guide.
+- Personal instruction document.
+
+Provide:
+
+- Add attachment.
+- Preview.
+- Replace.
+- Remove.
+- Rename.
+- Add caption.
+- Organize attachments.
+
+Media Display
+
+Images:
+
+- Thumbnail.
+- Full-screen preview.
+- Zoom support where appropriate.
+
+Videos:
+
+- In-app video playback.
+- Play.
+- Pause.
+- Seek.
+- Volume.
+- Full-screen mode.
+
+PDFs:
+
+- Appropriate document viewer.
+- Page navigation.
+
+Other documents:
+
+- Open with compatible external application when necessary.
+
+Use Android Photo Picker and Storage Access Framework.
+
+Copy files into app-private storage when required to ensure long-term availability.
+
+D. Exercise Schedule
+
+Allow:
+
+- Exercise date.
+- Start time.
+- Duration.
+- Sets.
+- Repetitions.
+- Rest interval.
+- Repeat schedule.
+- Reminder.
+- Custom ringtone.
+- Ringing duration.
+- Vibration.
+- Snooze.
+
+E. Exercise Session
+
+Provide:
+
+- Start.
+- Pause.
+- Resume.
+- Complete.
+- Cancel.
+
+During a session display:
+
+- Exercise name.
+- Current duration.
+- Sets completed.
+- Repetitions.
+- Rest time.
+- Progress.
+
+F. Exercise History
+
+Track:
+
+- Completed exercises.
+- Total duration.
+- Sets.
+- Repetitions.
+- Daily activity.
+- Weekly activity.
+- Monthly activity.
+
+Create charts using actual user data.
+
+Never generate fake progress.
+
+---
+
+11. ADD TASK — TASK MANAGEMENT
+
+Create a complete task management module.
+
+Users must be able to create and organize their daily tasks.
+
+Task Fields
+
+- Task title.
+- Description.
+- Date.
+- Time.
+- Priority.
+- Deadline.
+- Repeat schedule.
+- Reminder.
+- Optional image attachment.
+- Optional document attachment.
+
+Task Categories
+
+Provide:
+
+- Personal.
+- Study.
+- Work.
+- Health.
+- Shopping.
+- Other.
+
+Allow custom categories.
+
+Task Organization
+
+Separate tasks into:
+
+- Today's Tasks.
+- Tomorrow's Tasks.
+- Upcoming Tasks.
+- Pending Tasks.
+- Completed Tasks.
+- Task History.
+
+Task Operations
+
+- Create task.
+- Edit task.
+- Delete task.
+- Search.
+- Filter.
+- Sort.
+- Change priority.
+- Mark completed.
+- Reopen completed task.
+- Set reminder.
+
+Use the centralized reminder engine.
+
+Save all information locally.
+
+---
+
+12. MY WALLET
+
+Create a complete personal finance management module.
+
+This feature must be accessible from both the Dashboard and the bottom navigation.
+
+The Wallet must include:
+
+1. Income.
+2. Expenses.
+3. Monthly Overview.
+4. Transaction History.
+5. Built-in Calculator.
+
+A. Wallet Dashboard
+
+Display:
+
+- Total Income.
+- Total Expenses.
+- Remaining Balance.
+- Monthly Savings.
+
+All calculations must use actual database entries.
+
+Provide a clean financial overview.
+
+B. Income Management
+
+Allow users to add income.
+
+Fields:
+
+- Title.
+- Amount.
+- Category.
+- Date.
+- Payment method.
+- Notes.
+
+Features:
+
+- Add.
+- Edit.
+- Delete.
+- Search.
+- Filter.
+- History.
+
+C. Expense Management
+
+Allow users to add expenses.
+
+Fields:
+
+- Expense title.
+- Amount.
+- Category.
+- Date.
+- Payment method.
+- Notes.
+
+Default categories:
+
+- Food.
+- Transport.
+- Education.
+- Shopping.
+- Medical.
+- Bills.
+- Entertainment.
+- Other.
+
+Allow custom categories.
+
+D. Monthly Financial Overview
+
+Display:
+
+- Total income.
+- Total expenses.
+- Remaining balance.
+- Monthly savings.
+- Category-wise expenses.
+- Income history.
+- Expense history.
+
+Provide:
+
+- Daily view.
+- Weekly view.
+- Monthly view.
+- Yearly view.
+
+Allow month and year filtering.
+
+Use accurate mathematical calculations.
+
+Provide meaningful charts based on actual records.
+
+E. Built-in Calculator
+
+Add a dedicated Calculator feature inside My Wallet.
+
+The calculator must open instantly without leaving MYCARE.
+
+Implement:
+
+- Addition.
+- Subtraction.
+- Multiplication.
+- Division.
+- Percentage.
+- Decimal numbers.
+- Clear.
+- Delete last digit.
+- Negative numbers.
+- Parentheses.
+- Proper operator precedence.
+- Error handling.
+
+The calculator must work completely offline.
+
+Use a familiar professional calculator layout.
+
+Do not use WebView or launch an external calculator application.
+
+---
+
+13. GROCERY & SHOPPING
+
+Create a complete Grocery and Shopping Manager.
+
+A. Multiple Shopping Lists
+
+Users can create multiple shopping lists.
+
+Each list must support:
+
+- List name.
+- Creation date.
+- Description.
+- Shopping status.
+
+B. Grocery Items
+
+Fields:
+
+- Item name.
+- Quantity.
+- Unit.
+- Estimated price.
+- Actual price.
+- Notes.
+- Purchased status.
+
+C. Shopping Interface
+
+Separate items into:
+
+- Pending.
+- Purchased.
+
+Users can:
+
+- Add items.
+- Edit items.
+- Delete items.
+- Mark purchased.
+- Unmark purchased.
+- Search.
+- Sort.
+- Filter.
+
+Display:
+
+- Estimated total cost.
+- Actual purchased cost.
+- Remaining items.
+
+Purchased items must remain saved.
+
+Provide explicit actions:
+
+- Reset purchased items.
+- Clear entire list.
+- Delete individual items.
+
+Always show confirmation before destructive actions.
+
+D. Grocery History
+
+Save previous shopping lists.
+
+Allow users to review past shopping records.
+
+E. File Import
+
+Allow users to import:
+
+- Photos.
+- PDFs.
+- Supported documents.
+
+Do not use AI OCR.
+
+If text extraction is unavailable, display the uploaded file and allow manual item entry.
+
+F. Nearby Supermarkets
+
+Provide nearby supermarket and grocery shop search.
+
+Use location permission only when required.
+
+Use Google Maps Search or external search intents when no Places API is available.
+
+Never fabricate:
+
+- Store names.
+- Distances.
+- Prices.
+- Ratings.
+- Opening hours.
+
+---
+
+14. MY MEMORY
+
+Create a beautiful personal digital memory space.
+
+This feature must work as a personal memory book, not just a file storage screen.
+
+Divide it into three sections:
+
+1. My Notes.
+2. My Albums.
+3. My Voice Notes.
+
+A. My Notes
+
+Allow users to create text notes.
+
+Fields:
+
+- Title.
+- Note content.
+- Category.
+- Creation date.
+- Last edited date.
+- Favorite status.
+
+Features:
+
+- Create.
+- Edit.
+- Delete.
+- Search.
+- Favorite.
+- Unfavorite.
+- Folder organization.
+
+Provide a clean, distraction-free writing interface.
+
+Allow users to create custom folders.
+
+B. My Albums
+
+Allow users to create personal albums.
+
+Each album supports:
+
+- Album name.
+- Cover photo.
+- Description.
+- Creation date.
+- Optional location.
+- Multiple photos.
+- Multiple videos.
+- PDFs.
+- Other supported files.
+
+Example:
+
+Bandarban Tour.
+
+Inside an album:
+
+- Add photos.
+- Add videos.
+- Add files.
+- Preview media.
+- Rename files.
+- Delete files.
+- Change album cover.
+- Edit album details.
+
+Provide:
+
+- Grid view.
+- List view.
+- Full-screen image preview.
+- In-app video player.
+- File viewer.
+
+C. My Voice Notes
+
+Create a complete voice recording system.
+
+Features:
+
+- Start recording.
+- Pause recording.
+- Resume recording.
+- Stop recording.
+- Save recording.
+- Rename.
+- Add description.
+- Play.
+- Pause playback.
+- Delete.
+- Search.
+
+Display:
+
+- Recording title.
+- Recording date.
+- Duration.
+
+Store recordings in app-private local storage.
+
+Store metadata in Room Database.
+
+Do not upload recordings to any cloud service.
+
+Request microphone permission only when the user starts recording.
+
+---
+
+15. MY MEDICAL RECORDS
+
+Create a completely separate personal medical document management feature.
+
+Do not merge this feature with Doctor Search.
+
+A. Disease-Based Folders
+
+Users can create their own folders using disease or medical condition names.
+
+Examples:
+
+- Fever.
+- Dengue.
+- Diabetes.
+- Gastric.
+- Eye Problem.
+- Other personal conditions.
+
+These are examples only.
+
+Never create these folders automatically.
+
+B. Folder Information
+
+Fields:
+
+- Disease or condition name.
+- Description.
+- Diagnosis date, if known.
+- Doctor's name.
+- Hospital or clinic.
+- Treatment notes.
+- Important dates.
+- Personal observations.
+
+Do not diagnose users.
+
+C. Medical Document Upload
+
+Allow users to upload:
+
+- Medical reports.
+- Prescriptions.
+- Laboratory reports.
+- X-ray images.
+- Ultrasound reports.
+- MRI documents.
+- CT documents.
+- Photos.
+- PDFs.
+- Other supported files.
+
+Allow multiple documents per folder.
+
+D. Document Management
+
+Provide:
+
+- Preview.
+- Open image.
+- View PDF.
+- Rename.
+- Add description.
+- Date-wise organization.
+- Edit folder.
+- Delete document.
+- Delete folder.
+
+When deleting a folder, clearly explain that associated files will also be deleted.
+
+Request confirmation.
+
+E. Search
+
+Support:
+
+- Disease name.
+- Doctor name.
+- Hospital.
+- Document title.
+- Date-wise sorting.
+- Recently added documents.
+
+Keep everything locally stored.
+
+Provide optional privacy-conscious document organization, but do not implement password, PIN, biometric, or app-lock features.
+
+---
+
+16. DOCTOR SEARCH
+
+Create a dedicated Doctor Search feature.
+
+Its purpose is to help users discover relevant doctors, specialists, clinics, and hospitals.
+
+This feature must remain completely separate from My Medical Records.
+
+A. Disease-Based Doctor Search
+
+Allow users to enter a disease or health problem.
+
+Examples:
+
+- Fever.
+- Dengue.
+- Headache.
+- Eye Problem.
+- Gastric.
+- Diabetes.
+- Skin Problem.
+
+Use a predefined, transparent, rule-based disease-to-specialty mapping.
+
+Examples:
+
+- Eye-related problems → Ophthalmologist.
+- Skin-related problems → Dermatologist.
+- Heart-related conditions → Cardiologist.
+- Dental problems → Dentist.
+
+For ambiguous complaints, show general specialty suggestions and advise consulting a qualified professional.
+
+Do not describe the mapping as AI diagnosis.
+
+B. Three-Language Search
+
+Support:
+
+1. English.
+2. বাংলা.
+3. Banglish.
+
+Examples:
+
+English| বাংলা| Banglish
+Fever| জ্বর| Jor
+Headache| মাথাব্যথা| Matha betha
+Eye Problem| চোখের সমস্যা| Chokher somossa
+Gastric| গ্যাস্ট্রিক| Gastric
+Diabetes| ডায়াবেটিস| Diabetes
+Dengue| ডেঙ্গু| Dengue
+
+Implement:
+
+- Bangla normalization.
+- Case-insensitive English matching.
+- Banglish keyword mapping.
+- Common spelling variations.
+- Synonyms.
+- Fuzzy matching.
+
+Use a maintainable local keyword dictionary.
+
+C. Nearby Doctor and Hospital Search
+
+Allow searches by:
+
+- Current location.
+- District.
+- City.
+- Area.
+- Hospital name.
+- Specialist category.
+
+Use online search.
+
+When no API key is available, open relevant Google Maps Search or browser search results.
+
+Show externally sourced information when available:
+
+- Doctor name.
+- Specialty.
+- Hospital.
+- Address.
+- Phone.
+- Website.
+- Map.
+- Booking link.
+
+Never invent doctor information.
+
+Clearly identify external search results.
+
+D. Direct Contact
+
+Provide:
+
+- Call using ACTION_DIAL.
+- Open Google Maps.
+- Open hospital website.
+- Open external booking page.
+
+E. Appointment Booking
+
+If an actual booking page exists, open it.
+
+Otherwise, provide contact or calling options.
+
+Never show a fake appointment confirmation.
+
+---
+
+17. NUTRITION GUIDE
+
+Create a dedicated Nutrition Guide feature.
+
+Its purpose is to help users organize their personal food charts and daily meal schedules.
+
+A. Food Chart Upload
+
+Allow users to upload:
+
+- Food chart images.
+- PDFs.
+- Supported documents.
+- Other relevant files.
+
+Provide preview and full-screen viewing.
+
+Allow multiple food charts.
+
+B. Manual Food Chart Creation
+
+Users can create food charts manually.
+
+Fields:
+
+- Food name.
+- Quantity.
+- Unit.
+- Calories.
+- Meal time.
+- Meal category.
+- Notes.
+
+C. Meal Categories
+
+Provide:
+
+- Breakfast.
+- Mid-morning.
+- Lunch.
+- Afternoon Snack.
+- Dinner.
+- Before Sleep.
+- Custom Meal.
+
+D. Meal Schedule
+
+Allow:
+
+- Meal date.
+- Meal time.
+- Food name.
+- Quantity.
+- Calories.
+- Reminder.
+- Repeat schedule.
+
+Allow multiple food entries for one meal.
+
+E. Daily Nutrition Overview
+
+Display:
+
+- Daily food chart.
+- Meal schedule.
+- Total recorded calories.
+- Meal completion status.
+- Daily history.
+- Weekly history.
+
+All totals must come from actual user-entered data.
+
+Never invent nutritional values.
+
+If users manually enter calories, label them as user-entered information.
+
+F. Reminder Integration
+
+Use the centralized reminder system.
+
+Support:
+
+- Custom ringtone.
+- Ringing duration.
+- Snooze.
+- Vibration.
+- Notifications.
+
+Do not make personalized medical diet recommendations.
+
+---
+
+18. TRAVEL PLANNER
+
+Include a dedicated Travel Planner module accessible through the More section of the application.
+
+Users can create travel plans.
+
+Fields:
+
+- Trip name.
+- Destination.
+- Starting location.
+- Travel date.
+- Return date.
+- Hotel information.
+- Contact numbers.
+- Budget.
+- Travel expenses.
+- Places to visit.
+- Packing checklist.
+- Travel documents.
+- Important notes.
+- Photos.
+- Attachments.
+
+Travel Reminders
+
+Allow reminders for:
+
+- Departure.
+- Hotel check-in.
+- Important bookings.
+- Travel preparation.
+- Return journey.
+
+Provide:
+
+- Upcoming trips.
+- Ongoing trips.
+- Completed trips.
+- Travel history.
+
+All data must be stored locally.
+
+---
+
+19. EMERGENCY CENTER
+
+Create a dedicated Emergency Center.
+
+Allow users to save personal emergency contacts.
+
+Each contact supports:
+
+- Name.
+- Relationship.
+- Phone number.
+- Notes.
+
+Provide quick dial using Android's dialer.
+
+Allow optional emergency information:
+
+- Blood group.
+- Allergies.
+- Important medical notes.
+- Emergency instructions.
+
+All information must be optional.
+
+Do not automatically fill personal information.
+
+Keep data locally stored.
+
+---
+
+20. SETTINGS
+
+Create one centralized Settings section.
+
+All application-wide settings must be accessible from the Settings tab.
+
+Do not scatter important application settings across unrelated screens.
+
+Organize settings into clear groups.
+
+A. Appearance
+
+- Light Theme.
+- Dark Theme.
+- System Default.
+- Accent Color.
+- Custom Theme.
+- Font scaling where supported.
+
+Allow users to customize accent colors.
+
+Apply theme changes throughout the application.
+
+B. Language
+
+- English.
+- বাংলা.
+
+Changing language must update the entire interface immediately.
+
+Translate:
+
+- Dashboard.
+- Navigation.
+- Feature names.
+- Buttons.
+- Forms.
+- Dialogs.
+- Notifications.
+- Reminders.
+- Empty states.
+- Error messages.
+- Settings.
+
+Do not leave mixed-language labels unnecessarily.
+
+C. Reminder Settings
+
+- Default ringtone.
+- Custom ringtone selection.
+- Ringtone preview.
+- Default ringing duration.
+- Default snooze.
+- Default vibration.
+- Notification preferences.
+- Per-feature reminder preferences.
+
+D. Notification Settings
+
+Provide separate notification controls for:
+
+- Medicine.
+- Exercise.
+- Tasks.
+- Grocery.
+- Appointments.
+- Nutrition.
+- Travel.
+- General notifications.
+
+Allow individual notification preferences.
+
+E. Storage Management
+
+Display:
+
+- Database storage.
+- Photos.
+- Videos.
+- Documents.
+- Voice recordings.
+- Total app storage.
+
+Provide safe deletion options.
+
+Always request confirmation before permanent deletion.
+
+F. Backup and Restore
+
+Implement a local backup and restore system.
+
+Allow users to:
+
+- Export personal data.
+- Create complete backups.
+- Restore previous backups.
+- Include associated media.
+- Validate backup files.
+
+Use a documented backup format.
+
+Never overwrite existing data without explicit confirmation.
+
+Do not automatically upload backups to cloud services.
+
+G. Permissions
+
+Provide a permission overview.
+
+Display:
+
+- Notification access.
+- Exact alarm access.
+- Location access.
+- Microphone access.
+- Relevant media access.
+
+Show permission status and provide shortcuts to Android Settings when necessary.
+
+H. About MYCARE
+
+Display:
+
+- App name.
+- App version.
+- Application description.
+- Developer information.
+- Privacy Policy.
+- Terms and Conditions.
+- Help and Support.
+
+Display this exact developer credit:
+
+Developed by Abid Ahasan
+
+Use a subtle and professional design.
+
+---
+
+21. ADDITIONAL FEATURES AND MORE SECTION
+
+The bottom navigation must remain limited to five items.
+
+Features that are not part of the primary dashboard should be accessible through appropriate sections.
+
+Use the Health and Memory modules for related features.
+
+Use the Settings area for configuration.
+
+Provide an organized More section accessible from the appropriate application navigation area for additional modules.
+
+Additional modules include:
+
+- Travel Planner.
+- Emergency Center.
+
+Do not create unnecessary duplicate navigation destinations.
+
+---
+
+22. DATABASE AND ARCHITECTURE
+
+Use a modular MVVM architecture with Clean Architecture principles.
+
+Technology:
+
+- Kotlin.
+- Jetpack Compose.
+- Room Database.
+- DataStore.
+- Navigation Compose.
+- WorkManager.
+- AlarmManager.
+- Retrofit / OkHttp when required.
+- Media3 / ExoPlayer.
+- Android Storage Access Framework.
+- Android Photo Picker.
+
+Recommended Structure
+
+app/
+
+core/
+
+- database/
+- navigation/
+- notifications/
+- reminders/
+- permissions/
+- storage/
+- network/
+- common/
+- theme/
+
+feature/
+
+- dashboard/
+- medicine/
+- exercise/
+- tasks/
+- wallet/
+- grocery/
+- memory/
+- medicalrecords/
+- doctorsearch/
+- nutrition/
+- travel/
+- emergency/
+- settings/
+
+data/
+
+- local/
+- repository/
+- remote/
+
+domain/
+
+- model/
+- repository/
+- usecase/
+
+Database Entities
+
+Create appropriate Room entities for:
+
+- Medicine.
+- Medicine schedules.
+- Medicine history.
+- Exercise.
+- Exercise attachments.
+- Exercise sessions.
+- Tasks.
+- Grocery lists.
+- Grocery items.
+- Notes.
+- Note folders.
+- Memory albums.
+- Album attachments.
+- Voice notes.
+- Medical folders.
+- Medical documents.
+- Income.
+- Expenses.
+- Finance categories.
+- Nutrition plans.
+- Food entries.
+- Travel plans.
+- Emergency contacts.
+- Reminders.
+- App settings.
+
+Database Requirements
+
+- Unique primary keys.
+- Foreign keys.
+- Proper indexes.
+- Database transactions.
+- Database migrations.
+- Duplicate prevention.
+- Error handling.
+- Reactive Flow queries.
+- No main-thread database operations.
+
+Use repositories to separate database operations from UI code.
+
+Use ViewModels for business logic and screen states.
+
+File Storage
+
+Never store large files as Room BLOBs.
+
+Store media in app-private storage or use persistent content URIs.
+
+Store metadata in Room.
+
+Handle:
+
+- Missing files.
+- Corrupted files.
+- Moved files.
+- Unavailable URIs.
+
+Show recoverable error messages.
+
+---
+
+23. OFFLINE AND ONLINE FUNCTIONALITY
+
+MYCARE must be an offline-first application.
+
+Offline Features
+
+The following features must work without internet:
+
+- My Medicine.
+- Medicine Schedule.
+- Exercise Planner.
+- Exercise Attachments already saved locally.
+- Task Management.
+- Grocery Manager.
+- My Notes.
+- My Albums.
+- My Voice Notes.
+- My Medical Records.
+- My Wallet.
+- Calculator.
+- Nutrition Guide.
+- Travel Planner.
+- Emergency Center.
+- Settings.
+- Local Notifications and Reminders, subject to Android restrictions.
+
+Online Features
+
+Internet may be used for:
+
+- Doctor Search.
+- Nearby hospitals.
+- Nearby doctors.
+- Nearby supermarkets.
+- External medicine information.
+- External health information.
+- Hospital websites.
+- Booking pages.
+- Google Maps.
+
+Do not require a paid API key for basic functionality.
+
+When a reliable API is unavailable, use legitimate external search intents.
+
+Never fabricate search results.
+
+Do not send personal medical records, finance records, voice notes, or private information to external servers.
+
+---
+
+24. PRIVACY AND DATA MANAGEMENT
+
+All personal information must remain on the device by default.
+
+Do not implement:
+
+- User accounts.
+- Login.
+- Registration.
+- PIN.
+- Password.
+- Biometric app lock.
+- Cloud synchronization.
+
+Personal records include:
+
+- Medicine.
+- Exercise.
+- Tasks.
+- Medical documents.
+- Financial records.
+- Personal notes.
+- Albums.
+- Voice recordings.
+- Nutrition plans.
+- Travel information.
+- Emergency contacts.
+
+Do not upload these records automatically.
+
+External search queries should contain only the information necessary for the requested search.
+
+---
+
+25. PERFORMANCE AND RELIABILITY
+
+Optimize the application for everyday Android use.
+
+Requirements:
+
+- Smooth scrolling.
+- Fast navigation.
+- Efficient Room queries.
+- Lazy loading.
+- Efficient image rendering.
+- Efficient video playback.
+- Background-safe audio recording.
+- Proper resource cleanup.
+- No unnecessary background services.
+- Process-death recovery.
+- State restoration.
+- Reboot reminder recovery.
+- Android permission change handling.
+- Form validation.
+- Crash prevention.
+
+Use pagination for large media collections.
+
+Do not load all photos and videos into memory simultaneously.
+
+---
+
+26. ERROR HANDLING AND USER EXPERIENCE
+
+Every module must support:
+
+- Loading states.
+- Empty states.
+- Success feedback.
+- Error feedback.
+- Confirmation dialogs.
+- Form validation.
+- Permission-denied handling.
+- Offline handling.
+
+Examples:
+
+Empty form:
+Show a clear validation message.
+
+Reminder failure:
+Explain why the reminder could not be scheduled.
+
+Attachment failure:
+Show a recoverable error.
+
+Folder deletion:
+Explain that associated documents may also be deleted.
+
+Network failure:
+Show a useful retry option.
+
+Never crash because of missing optional information or unavailable attachments.
+
+---
+
+27. LOCALIZATION
+
+Implement complete English and Bangla localization.
+
+Use Android string resources.
+
+Do not hardcode user-facing text inside composables.
+
+Provide translated resources for:
+
+- Feature titles.
+- Navigation.
+- Buttons.
+- Dialogs.
+- Notifications.
+- Reminders.
+- Empty states.
+- Errors.
+- Settings.
+- Forms.
+- Date labels.
+- Time labels.
+
+Support Bangla text rendering correctly.
+
+Use appropriate fonts and layouts.
+
+Ensure text does not clip when Bangla labels are longer than English labels.
+
+---
+
+28. TESTING REQUIREMENTS
+
+Test the actual implementation.
+
+Database Testing
+
+Verify:
+
+- Create.
+- Read.
+- Update.
+- Delete.
+- Search.
+- Filtering.
+- Sorting.
+- Relationships.
+- Persistence after app restart.
+
+Reminder Testing
+
+Verify:
+
+- One-time reminders.
+- Daily reminders.
+- Weekly reminders.
+- Custom repeats.
+- Custom ringtone.
+- Ringing duration.
+- Snooze.
+- Dismiss.
+- Vibration.
+- Notifications.
+- Reboot recovery.
+
+File Testing
+
+Verify:
+
+- Photo upload.
+- Video upload.
+- PDF upload.
+- Document upload.
+- Audio selection.
+- Voice recording.
+- Playback.
+- Deletion.
+- Persistence after app restart.
+
+UI Testing
+
+Verify:
+
+- All screens.
+- All navigation.
+- Small-screen layouts.
+- Long text.
+- Keyboard behavior.
+- Dialogs.
+- Light theme.
+- Dark theme.
+- Bangla.
+- English.
+
+Functional Testing
+
+Verify:
+
+- Wallet calculations.
+- Calculator.
+- Medicine tracking.
+- Exercise tracking.
+- Task completion.
+- Grocery calculations.
+- Nutrition totals.
+- Search functionality.
+- Backup and restore.
+- Settings persistence.
+
+Never claim a test passed unless it was actually executed.
+
+---
+
+29. FINAL APPLICATION BUILD AND DELIVERY
+
+The final deliverable must include:
+
+- Complete Android Studio project.
+- Kotlin source code.
+- Jetpack Compose UI.
+- Room Database.
+- Database migrations.
+- DataStore.
+- Required dependencies.
+- AndroidManifest configuration.
+- Notification implementation.
+- Reminder implementation.
+- Local file management.
+- All specified feature modules.
+- App icon.
+- Application branding.
+- Build configuration.
+- Installation instructions.
+
+Use a consistent package name and versioning system.
+
+Ensure the project compiles successfully before delivery.
+
+If APK generation is supported:
+
+- Generate a debug APK.
+- Verify the APK file exists.
+- Test installation where possible.
+- Provide the actual verified APK.
+
+Do not provide fake APK links.
+
+Do not claim a successful build without verification.
+
+---
+
+30. DEVELOPMENT EXECUTION PLAN
+
+Develop the application in the following structured phases.
+
+Phase 1 — Foundation
+
+- Create Android project.
+- Configure Gradle.
+- Set up Kotlin.
+- Configure Jetpack Compose.
+- Create theme system.
+- Implement language selection.
+- Implement direct dashboard navigation.
+- Configure bottom navigation.
+- Configure Room Database.
+- Configure DataStore.
+- Create reusable components.
+
+Phase 2 — Core Systems
+
+- Centralized reminder engine.
+- Custom ringtone management.
+- Notification management.
+- Permission management.
+- Local file management.
+- Media playback.
+- Backup architecture.
+
+Phase 3 — Main Dashboard
+
+- Dynamic greeting.
+- Date and time.
+- Main feature cards.
+- Upcoming medicine.
+- Upcoming exercise.
+- Upcoming tasks.
+- Monthly wallet overview.
+- Real database integration.
+
+Phase 4 — Feature Development
+
+Implement each module completely:
+
+1. My Medicine.
+2. Exercise Planner.
+3. Add Task.
+4. My Wallet.
+5. Grocery & Shopping.
+6. My Memory.
+7. My Medical Records.
+8. Doctor Search.
+9. Nutrition Guide.
+10. Travel Planner.
+11. Emergency Center.
+
+Phase 5 — Settings and Localization
+
+- English.
+- Bangla.
+- Light theme.
+- Dark theme.
+- Accent customization.
+- Reminder settings.
+- Notification settings.
+- Permission overview.
+- Storage management.
+- Backup and Restore.
+- About MYCARE.
+
+Phase 6 — Testing and Optimization
+
+- Database testing.
+- Reminder testing.
+- Media testing.
+- Voice recording testing.
+- Calculator testing.
+- Navigation testing.
+- Form validation.
+- Offline testing.
+- UI testing.
+- Performance optimization.
+- Crash fixing.
+
+Phase 7 — Final Build
+
+- Complete source implementation.
+- Verify project compilation.
+- Build APK if supported.
+- Verify application installation.
+- Confirm all implemented modules.
+- Deliver the completed application.
+
+---
+
+31. STRICT FINAL DEVELOPMENT INSTRUCTIONS
+
+Follow these instructions without exception:
+
+1. Build a real native Android application.
+2. Use Kotlin and Jetpack Compose.
+3. Never use AI or AI APIs.
+4. Never add authentication.
+5. Never add login or registration.
+6. Never add password or PIN security.
+7. Never show an onboarding sequence after language selection.
+8. First launch must show only language selection.
+9. Language selection must navigate directly to Dashboard.
+10. Keep exactly five primary bottom navigation destinations: Home, Wallet, Health, Memory, Settings.
+11. Do not add Quick Actions.
+12. Do not implement Water Tracker.
+13. Do not implement Sleep Tracker.
+14. Keep dashboard feature order exactly as specified.
+15. Implement dynamic time-based greetings.
+16. Keep all personal data locally stored.
+17. Use one centralized reminder system.
+18. Avoid repeatedly requesting permissions.
+19. Use Android-supported persistent file access.
+20. Implement every specified feature completely.
+21. Do not display fabricated statistics.
+22. Do not fabricate doctors, hospitals, or medical information.
+23. Never prescribe medicine.
+24. Keep the application functional offline wherever specified.
+25. Maintain a consistent design system.
+26. Never put all application code into one file.
+27. Never leave dummy buttons.
+28. Never leave unfinished modules.
+29. Never claim untested functionality is tested.
+30. Do not stop after implementing the dashboard.
+
+---
+
+FINAL INSTRUCTION
+
+Build MYCARE as a complete, polished, reliable, and genuinely useful Android personal healthcare and daily life management application.
+
+The application must provide a unified experience for:
+
+- Personal Medicine Management.
+- Exercise Planning.
+- Task Management.
+- Personal Finance.
+- Grocery and Shopping.
+- Personal Memories.
+- Medical Records.
+- Doctor Search.
+- Nutrition Planning.
+- Travel Planning.
+- Emergency Contacts.
+
+The application must start with a simple language selection screen and then navigate directly to the dashboard.
+
+Maintain a clean, premium, professional interface with five primary bottom navigation destinations.
+
+Prioritize:
+
+- Functionality.
+- Reliability.
+- Privacy.
+- Accessibility.
+- Offline usability.
+- Excellent UI/UX.
+- Maintainable architecture.
+
+If implementation requires multiple generations, continue from the exact previous development state. Preserve working code and complete all remaining modules systematically.
+
+The final result must be a genuinely functional Android application — not a concept, not a mockup, and not a partially functional prototype.
+
+MYCARE — Your Personal Assistant 
+
+Developed by @Abid Ahasan.

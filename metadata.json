@@ -1,0 +1,6 @@
+{
+  "name": "MYCARE",
+  "description": "MYCARE - Offline-first personal healthcare and daily life management application in English and Bangla.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

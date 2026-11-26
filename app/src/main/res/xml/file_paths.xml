@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <files-path name="mycare_media" path="media/" />
+    <files-path name="mycare_voice" path="voice_notes/" />
+    <files-path name="mycare_backups" path="backups/" />
+    <cache-path name="mycare_cache" path="." />
+</paths>
