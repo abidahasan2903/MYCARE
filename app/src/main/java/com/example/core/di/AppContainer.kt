@@ -19,6 +19,7 @@ import com.example.data.repository.ReminderRepository
 import com.example.data.repository.TaskRepository
 import com.example.data.repository.TravelRepository
 import com.example.data.repository.WalletRepository
+import com.example.data.repository.WellnessRepository
 
 class AppContainer(context: Context) {
     private val appContext = context.applicationContext
@@ -42,4 +43,5 @@ class AppContainer(context: Context) {
     val memoryRepository = MemoryRepository(database.memoryDao(), fileStorage)
     val travelRepository = TravelRepository(database.travelDao(), fileStorage)
     val emergencyRepository = EmergencyRepository(database.emergencyDao())
+    val wellnessRepository = WellnessRepository(database.wellnessDao())
 }

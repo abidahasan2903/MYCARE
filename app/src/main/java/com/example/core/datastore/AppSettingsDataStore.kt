@@ -36,7 +36,8 @@ data class AppSettingsState(
     val notifAppointments: Boolean = true,
     val notifNutrition: Boolean = true,
     val notifTravel: Boolean = true,
-    val notifGeneral: Boolean = true
+    val notifGeneral: Boolean = true,
+    val waterDailyGoalMl: Int = 2000
 )
 
 class AppSettingsDataStore(private val context: Context) {
@@ -61,6 +62,7 @@ class AppSettingsDataStore(private val context: Context) {
         val NOTIF_NUTRITION = booleanPreferencesKey("notif_nutrition")
         val NOTIF_TRAVEL = booleanPreferencesKey("notif_travel")
         val NOTIF_GENERAL = booleanPreferencesKey("notif_general")
+        val WATER_DAILY_GOAL_ML = intPreferencesKey("water_daily_goal_ml")
     }
 
     val settingsFlow: Flow<AppSettingsState> = context.dataStore.data.map { prefs ->
@@ -83,7 +85,8 @@ class AppSettingsDataStore(private val context: Context) {
             notifAppointments = prefs[Keys.NOTIF_APPOINTMENTS] ?: true,
             notifNutrition = prefs[Keys.NOTIF_NUTRITION] ?: true,
             notifTravel = prefs[Keys.NOTIF_TRAVEL] ?: true,
-            notifGeneral = prefs[Keys.NOTIF_GENERAL] ?: true
+            notifGeneral = prefs[Keys.NOTIF_GENERAL] ?: true,
+            waterDailyGoalMl = (prefs[Keys.WATER_DAILY_GOAL_ML] ?: 2000).coerceIn(250, 10000)
         )
     }
 
@@ -139,6 +142,10 @@ class AppSettingsDataStore(private val context: Context) {
         context.dataStore.edit { it[Keys.DEFAULT_VIBRATION] = enabled }
     }
 
+    suspend fun setWaterDailyGoalMl(goalMl: Int) {
+        context.dataStore.edit { it[Keys.WATER_DAILY_GOAL_ML] = goalMl.coerceIn(250, 10000) }
+    }
+
     suspend fun setFeatureNotification(featureKey: String, enabled: Boolean) {
         context.dataStore.edit { prefs ->
             when (featureKey) {
@@ -180,6 +187,7 @@ class AppSettingsDataStore(private val context: Context) {
             prefs[Keys.NOTIF_NUTRITION] = state.notifNutrition
             prefs[Keys.NOTIF_TRAVEL] = state.notifTravel
             prefs[Keys.NOTIF_GENERAL] = state.notifGeneral
+            prefs[Keys.WATER_DAILY_GOAL_ML] = state.waterDailyGoalMl.coerceIn(250, 10000)
         }
     }
 }

@@ -33,6 +33,8 @@ sealed interface MyCareRoute {
     @Serializable data object Travel : MyCareRoute
     @Serializable data class TravelDetail(val travelId: Long) : MyCareRoute
     @Serializable data object Emergency : MyCareRoute
+    @Serializable data object Wellness : MyCareRoute
+    @Serializable data object HealthInformation : MyCareRoute
 
     // Full-screen Media / Document Viewer
     @Serializable data class MediaViewer(

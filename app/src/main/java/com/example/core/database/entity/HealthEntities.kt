@@ -215,3 +215,22 @@ data class FoodChartFileEntity(
     val mimeType: String = "*/*",
     val createdAt: Long = System.currentTimeMillis()
 )
+
+@Serializable
+@Entity(tableName = "water_intake_records", indices = [Index("recordedAtMillis")])
+data class WaterIntakeEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val amountMl: Int,
+    val recordedAtMillis: Long = System.currentTimeMillis(),
+    val note: String = ""
+)
+
+@Serializable
+@Entity(tableName = "sleep_records", indices = [Index("bedtimeMillis"), Index("wakeTimeMillis")])
+data class SleepRecordEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val bedtimeMillis: Long,
+    val wakeTimeMillis: Long,
+    val notes: String = "",
+    val createdAtMillis: Long = System.currentTimeMillis()
+)

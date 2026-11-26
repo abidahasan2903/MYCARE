@@ -35,6 +35,9 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
 
+      - name: Run unit and Robolectric tests
+        run: ./gradlew --no-daemon testDebugUnitTest
+
       - name: Build installable debug APK
         env:
           APP_VERSION_CODE: ${{ github.run_number }}

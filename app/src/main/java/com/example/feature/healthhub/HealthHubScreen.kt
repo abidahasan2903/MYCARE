@@ -23,6 +23,8 @@ import androidx.compose.material.icons.filled.FolderShared
 import androidx.compose.material.icons.filled.LocalHospital
 import androidx.compose.material.icons.filled.Medication
 import androidx.compose.material.icons.filled.Restaurant
+import androidx.compose.material.icons.filled.WaterDrop
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -49,7 +51,9 @@ fun HealthHubScreen(
         Triple(R.string.feature_medical_records_title, R.string.feature_medical_records_desc, Icons.Default.FolderShared to MyCareRoute.MedicalRecords),
         Triple(R.string.feature_doctor_search_title, R.string.feature_doctor_search_desc, Icons.Default.LocalHospital to MyCareRoute.DoctorSearch),
         Triple(R.string.feature_nutrition_title, R.string.feature_nutrition_desc, Icons.Default.Restaurant to MyCareRoute.Nutrition),
-        Triple(R.string.feature_emergency_title, R.string.feature_emergency_desc, Icons.Default.Emergency to MyCareRoute.Emergency)
+        Triple(R.string.feature_emergency_title, R.string.feature_emergency_desc, Icons.Default.Emergency to MyCareRoute.Emergency),
+        Triple(R.string.feature_wellness_title, R.string.feature_wellness_desc, Icons.Default.WaterDrop to MyCareRoute.Wellness),
+        Triple(R.string.feature_health_info_title, R.string.feature_health_info_desc, Icons.Default.Search to MyCareRoute.HealthInformation)
     )
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {

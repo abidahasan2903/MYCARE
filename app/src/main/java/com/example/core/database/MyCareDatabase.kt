@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.core.database.dao.EmergencyDao
 import com.example.core.database.dao.ExerciseDao
@@ -16,6 +17,7 @@ import com.example.core.database.dao.ReminderDao
 import com.example.core.database.dao.TaskDao
 import com.example.core.database.dao.TravelDao
 import com.example.core.database.dao.WalletDao
+import com.example.core.database.dao.WellnessDao
 import com.example.core.database.entity.AlbumAttachmentEntity
 import com.example.core.database.entity.EmergencyContactEntity
 import com.example.core.database.entity.EmergencyProfileEntity
@@ -37,6 +39,7 @@ import com.example.core.database.entity.NoteEntity
 import com.example.core.database.entity.NoteFolderEntity
 import com.example.core.database.entity.NutritionEntryEntity
 import com.example.core.database.entity.ReminderEntity
+import com.example.core.database.entity.SleepRecordEntity
 import com.example.core.database.entity.TaskCategoryEntity
 import com.example.core.database.entity.TaskEntity
 import com.example.core.database.entity.TravelAttachmentEntity
@@ -44,6 +47,7 @@ import com.example.core.database.entity.TravelChecklistItemEntity
 import com.example.core.database.entity.TravelExpenseEntity
 import com.example.core.database.entity.TravelPlanEntity
 import com.example.core.database.entity.VoiceNoteEntity
+import com.example.core.database.entity.WaterIntakeEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -77,9 +81,11 @@ import kotlinx.coroutines.launch
         TravelAttachmentEntity::class,
         EmergencyContactEntity::class,
         EmergencyProfileEntity::class,
-        ReminderEntity::class
+        ReminderEntity::class,
+        WaterIntakeEntity::class,
+        SleepRecordEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class MyCareDatabase : RoomDatabase() {
@@ -94,9 +100,20 @@ abstract class MyCareDatabase : RoomDatabase() {
     abstract fun travelDao(): TravelDao
     abstract fun emergencyDao(): EmergencyDao
     abstract fun reminderDao(): ReminderDao
+    abstract fun wellnessDao(): WellnessDao
 
     companion object {
         const val DB_NAME = "mycare_database.db"
+
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("CREATE TABLE IF NOT EXISTS `water_intake_records` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `amountMl` INTEGER NOT NULL, `recordedAtMillis` INTEGER NOT NULL, `note` TEXT NOT NULL)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_water_intake_records_recordedAtMillis` ON `water_intake_records` (`recordedAtMillis`)")
+                db.execSQL("CREATE TABLE IF NOT EXISTS `sleep_records` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `bedtimeMillis` INTEGER NOT NULL, `wakeTimeMillis` INTEGER NOT NULL, `notes` TEXT NOT NULL, `createdAtMillis` INTEGER NOT NULL)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_sleep_records_bedtimeMillis` ON `sleep_records` (`bedtimeMillis`)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_sleep_records_wakeTimeMillis` ON `sleep_records` (`wakeTimeMillis`)")
+            }
+        }
 
         @Volatile
         private var INSTANCE: MyCareDatabase? = null
@@ -113,6 +130,7 @@ abstract class MyCareDatabase : RoomDatabase() {
                 MyCareDatabase::class.java,
                 DB_NAME
             )
+                .addMigrations(MIGRATION_1_2)
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)

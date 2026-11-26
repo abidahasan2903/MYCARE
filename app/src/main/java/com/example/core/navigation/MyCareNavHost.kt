@@ -86,6 +86,9 @@ import com.example.feature.travel.TravelListScreen
 import com.example.feature.travel.TravelViewModel
 import com.example.feature.wallet.WalletScreen
 import com.example.feature.wallet.WalletViewModel
+import com.example.feature.wellness.WellnessScreen
+import com.example.feature.wellness.WellnessViewModel
+import com.example.feature.healthinfo.HealthInformationScreen
 import kotlinx.coroutines.launch
 
 private data class BottomTabSpec(
@@ -505,6 +508,23 @@ private fun MyCareNavGraph(
 
         composable<MyCareRoute.DoctorSearch> {
             DoctorSearchScreen(onBack = { navController.popBackStack() })
+        }
+
+        composable<MyCareRoute.Wellness> {
+            val vm = provideViewModel {
+                WellnessViewModel(
+                    wellnessRepository = container.wellnessRepository,
+                    reminderRepository = container.reminderRepository,
+                    settingsStore = container.settingsStore,
+                    fileStorage = container.fileStorage,
+                    audioPlayer = container.audioPlayer
+                )
+            }
+            WellnessScreen(viewModel = vm, onBack = { navController.popBackStack() })
+        }
+
+        composable<MyCareRoute.HealthInformation> {
+            HealthInformationScreen(onBack = { navController.popBackStack() })
         }
 
         composable<MyCareRoute.Nutrition> {

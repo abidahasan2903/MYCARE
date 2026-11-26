@@ -25,6 +25,7 @@ import com.example.core.database.entity.NoteEntity
 import com.example.core.database.entity.NoteFolderEntity
 import com.example.core.database.entity.NutritionEntryEntity
 import com.example.core.database.entity.ReminderEntity
+import com.example.core.database.entity.SleepRecordEntity
 import com.example.core.database.entity.TaskCategoryEntity
 import com.example.core.database.entity.TaskEntity
 import com.example.core.database.entity.TravelAttachmentEntity
@@ -32,6 +33,7 @@ import com.example.core.database.entity.TravelChecklistItemEntity
 import com.example.core.database.entity.TravelExpenseEntity
 import com.example.core.database.entity.TravelPlanEntity
 import com.example.core.database.entity.VoiceNoteEntity
+import com.example.core.database.entity.WaterIntakeEntity
 import com.example.core.datastore.AppSettingsDataStore
 import com.example.core.datastore.AppSettingsState
 import com.example.core.reminders.ReminderScheduler
@@ -67,7 +69,8 @@ data class BackupSettingsPayload(
     val notifAppointments: Boolean,
     val notifNutrition: Boolean,
     val notifTravel: Boolean,
-    val notifGeneral: Boolean
+    val notifGeneral: Boolean,
+    val waterDailyGoalMl: Int = 2000
 )
 
 @Serializable
@@ -103,7 +106,9 @@ data class MyCareBackupPayload(
     val travelAttachments: List<TravelAttachmentEntity> = emptyList(),
     val emergencyContacts: List<EmergencyContactEntity> = emptyList(),
     val emergencyProfile: EmergencyProfileEntity? = null,
-    val reminders: List<ReminderEntity> = emptyList()
+    val reminders: List<ReminderEntity> = emptyList(),
+    val waterIntakes: List<WaterIntakeEntity> = emptyList(),
+    val sleepRecords: List<SleepRecordEntity> = emptyList()
 )
 
 class BackupManager(
@@ -139,7 +144,8 @@ class BackupManager(
                     notifAppointments = s.notifAppointments,
                     notifNutrition = s.notifNutrition,
                     notifTravel = s.notifTravel,
-                    notifGeneral = s.notifGeneral
+                    notifGeneral = s.notifGeneral,
+                    waterDailyGoalMl = s.waterDailyGoalMl
                 ),
                 medicines = db.medicineDao().getAllMedicinesSync(),
                 medicineSchedules = db.medicineDao().getAllSchedulesSync(),
@@ -168,7 +174,9 @@ class BackupManager(
                 travelAttachments = db.travelDao().getAllAttachmentsSync(),
                 emergencyContacts = db.emergencyDao().getAllContactsSync(),
                 emergencyProfile = db.emergencyDao().getProfileSync(),
-                reminders = db.reminderDao().getAllRemindersSync()
+                reminders = db.reminderDao().getAllRemindersSync(),
+                waterIntakes = db.wellnessDao().getAllWaterIntakesSync(),
+                sleepRecords = db.wellnessDao().getAllSleepRecordsSync()
             )
 
             val payloadJson = json.encodeToString(payload)
@@ -313,6 +321,8 @@ class BackupManager(
                 payload.reminders.forEach {
                     db.reminderDao().insertReminder(it.copy(ringtoneUri = remapPath(it.ringtoneUri)))
                 }
+                payload.waterIntakes.forEach { db.wellnessDao().insertWaterIntake(it) }
+                payload.sleepRecords.forEach { db.wellnessDao().insertSleepRecord(it) }
             }
 
             settingsStore.restoreFromState(
@@ -335,7 +345,8 @@ class BackupManager(
                     notifAppointments = payload.settings.notifAppointments,
                     notifNutrition = payload.settings.notifNutrition,
                     notifTravel = payload.settings.notifTravel,
-                    notifGeneral = payload.settings.notifGeneral
+                    notifGeneral = payload.settings.notifGeneral,
+                    waterDailyGoalMl = payload.settings.waterDailyGoalMl
                 )
             )
                 db.reminderDao().getEnabledRemindersSync().forEach { scheduler.scheduleReminder(it) }

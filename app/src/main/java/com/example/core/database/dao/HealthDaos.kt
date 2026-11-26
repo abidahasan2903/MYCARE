@@ -16,6 +16,8 @@ import com.example.core.database.entity.MedicineDoseLogEntity
 import com.example.core.database.entity.MedicineEntity
 import com.example.core.database.entity.MedicineScheduleEntity
 import com.example.core.database.entity.NutritionEntryEntity
+import com.example.core.database.entity.SleepRecordEntity
+import com.example.core.database.entity.WaterIntakeEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -187,4 +189,31 @@ interface NutritionDao {
 
     @Delete
     suspend fun deleteChartFile(file: FoodChartFileEntity)
+}
+
+@Dao
+interface WellnessDao {
+    @Query("SELECT * FROM water_intake_records ORDER BY recordedAtMillis DESC")
+    fun observeWaterIntakes(): Flow<List<WaterIntakeEntity>>
+
+    @Query("SELECT * FROM water_intake_records ORDER BY recordedAtMillis DESC")
+    suspend fun getAllWaterIntakesSync(): List<WaterIntakeEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertWaterIntake(entry: WaterIntakeEntity): Long
+
+    @Delete
+    suspend fun deleteWaterIntake(entry: WaterIntakeEntity)
+
+    @Query("SELECT * FROM sleep_records ORDER BY bedtimeMillis DESC")
+    fun observeSleepRecords(): Flow<List<SleepRecordEntity>>
+
+    @Query("SELECT * FROM sleep_records ORDER BY bedtimeMillis DESC")
+    suspend fun getAllSleepRecordsSync(): List<SleepRecordEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSleepRecord(record: SleepRecordEntity): Long
+
+    @Delete
+    suspend fun deleteSleepRecord(record: SleepRecordEntity)
 }

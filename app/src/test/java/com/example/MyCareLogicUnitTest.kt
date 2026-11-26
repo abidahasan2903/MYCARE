@@ -10,6 +10,8 @@ import com.example.core.theme.AccentTheme
 import com.example.core.ui.components.nextFutureTriggerMillis
 import com.example.feature.doctorsearch.DoctorSearchDictionary
 import com.example.feature.wallet.CalculatorEvaluator
+import com.example.feature.wellness.sleepDurationMinutes
+import com.example.feature.healthinfo.healthInformationSearchUrl
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
@@ -21,6 +23,21 @@ import java.util.Calendar
 import java.util.TimeZone
 
 class MyCareLogicUnitTest {
+
+    @Test
+    fun wellness_sleepDurationIsCalculatedInWholeMinutes() {
+        assertEquals(7 * 60L + 30L, sleepDurationMinutes(0L, (7 * 60L + 30L) * 60_000L))
+        assertEquals(0L, sleepDurationMinutes(10_000L, 5_000L))
+    }
+
+    @Test
+    fun healthInformationSearchUsesTrustedSitesAndEncodesQuery() {
+        val url = healthInformationSearchUrl("blood pressure & sleep")
+        assertTrue(url.startsWith("https://www.google.com/search?q="))
+        assertTrue(url.contains("medlineplus.gov"))
+        assertTrue(url.contains("nhs.uk"))
+        assertTrue(url.contains("blood%2Bpressure%2B%26%2Bsleep"))
+    }
 
     @Test
     fun calculator_evaluatesPrecedenceAndParentheses() {

@@ -1,82 +1,107 @@
-# MYCARE
+✨ MYCARE – Your Health. Your Life. Your Everything.
 
-**MYCARE** is an offline-first Android companion for personal health, wellness, and everyday organization. It includes an English and Bangla interface and keeps user-created records on the device.
+MYCARE is a modern, all-in-one health and personal life management application designed to make everyday healthcare, personal organization, and daily activities easier and more accessible. It brings essential health management and lifestyle tools together in one beautifully designed, user-friendly application.
 
-> MYCARE is an organization tool, not a medical device. It does not diagnose conditions or replace a qualified healthcare professional.
+🎯 Project Purpose
 
-## Download and install
+The main purpose of MYCARE is to provide users with a single platform for managing their health information, medicines, exercise routines, nutrition, personal memories, finances, and everyday activities. Instead of installing multiple applications, users can manage important aspects of their daily lives in one place.
 
-1. Open [Latest MYCARE Release](https://github.com/abidahasan2903/MYCARE/releases/latest).
-2. Download **MYCARE.apk** to an Android phone.
-3. Open the downloaded APK. If Android asks, allow your browser or file manager to install unknown apps, then confirm **Install**.
-4. Launch **MYCARE** and choose English or বাংলা.
+✨ Key Features
 
-The GitHub Actions workflow builds a debug-signed APK on each push to `main` and publishes it to the rolling **latest** release. If you already installed a MYCARE APK signed with a different key, Android may require uninstalling it before installing this release; uninstalling removes that installation's local app data, so export a backup first.
+❤️ Health Management
+- Medicine Management and Dose Tracking
+- Exercise Planner and Progress Tracking
+- Water Intake Tracker
+- Sleep Tracker
+- Nutrition Guide and Food Charts
+- Medical Records and Document Management
+- Doctor Search
+- Health & Medicine Information Search
 
-## What it includes
+🧠 My Memory
+- Personal Notes and Categories
+- Photo and Video Albums
+- Document and File Management
+- Voice Notes and Audio Recording
+- Search and Organized Memory Storage
 
-- **Health and medical records:** medicine lists and details, reminders, health hub, medical folders, and prescription/report attachments.
-- **Daily planning:** tasks, exercise plans, grocery lists, travel plans, and nutrition tracking.
-- **Personal tools:** income/expense wallet, calculator, emergency contacts and profile, memory albums, photo/video/document viewing, and voice notes.
-- **Search and device actions:** doctor specialty lookup, nearby search, map/dialer links, reminders, and notifications.
-- **Personalization:** English and Bangla, light/dark themes, accent themes, font sizing, and local backup/restore.
+💰 My Wallet
+- Income and Expense Management
+- Custom Financial Categories
+- Balance and Savings Overview
+- Monthly Financial Reports
+- Category-wise Spending
+- Financial Charts
+- Built-in Offline Calculator
 
-Some device features ask for permission when you use them. Internet access is used for online search or opening external map/browser content; core records are designed to work offline. The current repository does not configure Gemini or Firebase cloud features.
+🛒 Daily Life Management
+- Grocery List Manager
+- Purchased and Pending Item Tracking
+- Task and Reminder Management
+- Travel Planner
+- Trip Budget and Expense Tracking
+- Emergency Contacts
 
-## Privacy and data
+⏰ Smart Reminder System
+- Medicine and Exercise Reminders
+- Water and Sleep Reminders
+- Task and Appointment Reminders
+- Grocery and Travel Reminders
+- Custom Alarm Sounds
+- Custom Alarm Duration
+- Snooze and Dismiss Options
+- Vibration and Notifications
+- Daily, Weekly, and Custom Repeat Schedules
 
-MYCARE does not require an account. Records and preferences are stored in the app's local Room/SQLite database and app storage. There is no cloud sync configured in this build. Use **Settings → Backup & Restore** before changing devices; imported or restored backups replace local app data. The app does not provide medical diagnosis or treatment.
+⚙️ Additional Features
+- Beautiful and intuitive user interface
+- Premium minimalist design
+- Light, Dark & System appearance modes
+- Customizable themes and accent colors
+- English and Bangla language support
+- Interactive home dashboard
+- Smart search and easy navigation
+- Local data storage
+- Offline accessibility
+- Local backup and restore
 
-## Technology
+🚀 Advantages
+- **All-in-One Solution:** Manage health, personal information, and daily activities in one application.
+- **Health-Focused:** Organize medicines, exercise, nutrition, sleep, and medical records.
+- **Personal Organization:** Keep notes, memories, documents, and voice recordings together.
+- **Offline Support:** Use personal management features without an internet connection.
+- **Privacy-Focused:** Personal information is stored locally on the device by default.
+- **Easy to Use:** Simple navigation and organized modules.
+- **Time-Saving:** Manage reminders and everyday activities from one place.
 
-- Kotlin and Jetpack Compose with Material 3
-- Android Navigation Compose
-- Room / SQLite and Preferences DataStore
-- Android notifications, alarms, media playback, and app storage APIs
-- Coroutines, Coil, and Kotlin Serialization
-- Gradle Kotlin DSL and GitHub Actions for Android APK releases
+🛠️ Technology Stack
+- **Programming Language:** Kotlin
+- **UI Framework:** Jetpack Compose
+- **Architecture:** Modular Android Architecture
+- **Local Database:** Room / SQLite
+- **Local Preferences:** DataStore
+- **Background Tasks:** WorkManager
+- **Reminders:** AlarmManager & Android Notifications
+- **Media Management:** Android Photo Picker & Storage Access Framework
+- **Development Environment:** Android Studio
 
-## Build locally
+🔒 Privacy & Offline Approach
 
-### Requirements
+MYCARE is designed with an offline-first approach. Its core personal management features work locally on the device without requiring an online account, cloud database, or external calculation API.
 
-- JDK 17
-- Android SDK Platform **36.1** and Build Tools **36.1.0**
-- Android Studio (recommended) or the included Gradle wrapper
+MYCARE does not require login, signup, passwords, PIN codes, biometric authentication, or app lock.
 
-Clone the repository and build a debug APK:
+Internet access is only required for features that search for external information, such as doctor discovery and health information searches. Personal data is not automatically uploaded to external servers.
 
-```bash
-git clone https://github.com/abidahasan2903/MYCARE.git
-cd MYCARE
-./gradlew assembleDebug
-```
+👨‍💻 Developer
 
-On Windows PowerShell use:
+Developed by @Abid Ahasan  
+Software Engineering Student | App Developer
 
-```powershell
-.\gradlew.bat assembleDebug
-```
+⭐ MYCARE – Your Health. Your Life. Your Everything.
 
-The APK is written to `app/build/outputs/apk/debug/app-debug.apk`. Open the project in Android Studio to run it on an emulator or a connected device.
+Manage Better. Live Healthier.
 
-## Repository layout
+---
 
-```text
-app/src/main/java/com/example/
-├── core/       # database, navigation, permissions, storage, reminders, theme
-├── data/       # local repositories
-└── feature/    # dashboard, health, medicines, records, wallet, tasks, and more
-app/src/main/res/       # launcher icons, English/Bangla strings, and resources
-app/src/test/           # existing unit and Robolectric test sources
-gradle/                 # version catalog and Gradle wrapper
-.github/workflows/      # Android APK build and latest-release workflow
-```
-
-## Releases
-
-Every push to `main` builds `MYCARE.apk`, stores a short-lived workflow artifact, and updates the repository's [latest GitHub Release](https://github.com/abidahasan2903/MYCARE/releases/latest). Builds are debug-signed for easy installation and evaluation; a Play Store production release should use a maintainer-controlled signing key and a stable release process.
-
-## Developer
-
-**Abid Ahasan** · Software Engineering student · Mobile and web app developer
+📥 **[Download MYCARE](https://github.com/abidahasan2903/MYCARE/releases/latest/download/MYCARE.apk)**
