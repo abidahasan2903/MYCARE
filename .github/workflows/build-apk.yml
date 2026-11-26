@@ -38,6 +38,9 @@ jobs:
       - name: Run unit and Robolectric tests
         run: ./gradlew --no-daemon testDebugUnitTest
 
+      - name: Run Android lint checks
+        run: ./gradlew --no-daemon lintDebug
+
       - name: Build installable debug APK
         env:
           APP_VERSION_CODE: ${{ github.run_number }}
