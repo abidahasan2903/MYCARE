@@ -176,7 +176,7 @@ class ExampleRobolectricTest {
     }
 
     @Test
-    fun roomDatabase_migratesVersionOneToTwoWithoutLosingWalletData() {
+    fun roomDatabase_migratesVersionOneToTwoWithoutLosingWalletData() = runBlocking {
         val dbName = "mycare-migration-${System.nanoTime()}.db"
         val initial = Room.databaseBuilder(context, MyCareDatabase::class.java, dbName)
             .allowMainThreadQueries()
