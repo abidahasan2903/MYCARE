@@ -36,7 +36,7 @@ class MyCareLogicUnitTest {
         assertTrue(url.startsWith("https://www.google.com/search?q="))
         assertTrue(url.contains("medlineplus.gov"))
         assertTrue(url.contains("nhs.uk"))
-        assertTrue(url.contains("blood%2Bpressure%2B%26%2Bsleep"))
+        assertTrue(url.contains("blood+pressure+%26+sleep"))
     }
 
     @Test
