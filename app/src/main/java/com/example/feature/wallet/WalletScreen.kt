@@ -46,7 +46,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -71,6 +71,7 @@ import com.example.core.ui.components.BarChartEntry
 import com.example.core.ui.components.ConfirmDeleteDialog
 import com.example.core.ui.components.DatePickerField
 import com.example.core.ui.components.MyCareEmptyState
+import com.example.core.ui.components.MyCareTopBar
 import com.example.core.ui.components.MyCareSearchBar
 import com.example.core.ui.components.SimpleBarChart
 import com.example.core.ui.components.formatDateShort
@@ -87,20 +88,24 @@ fun WalletScreen(
     var txToDelete by remember { mutableStateOf<FinanceTransactionEntity?>(null) }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        TabRow(
+        MyCareTopBar(title = stringResource(R.string.feature_wallet_title))
+        ScrollableTabRow(
             selectedTabIndex = selectedTab,
+            edgePadding = 12.dp,
             containerColor = MaterialTheme.colorScheme.surfaceContainer,
             contentColor = MaterialTheme.colorScheme.primary
         ) {
             Tab(
                 selected = selectedTab == 0,
                 onClick = { selectedTab = 0 },
-                text = { Text(stringResource(R.string.wallet_overview)) }
+                text = { Text(stringResource(R.string.wallet_overview)) },
+                modifier = Modifier.testTag("tab_wallet_overview")
             )
             Tab(
                 selected = selectedTab == 1,
                 onClick = { selectedTab = 1 },
-                text = { Text(stringResource(R.string.wallet_transactions)) }
+                text = { Text(stringResource(R.string.wallet_transactions)) },
+                modifier = Modifier.testTag("tab_wallet_transactions")
             )
             Tab(
                 selected = selectedTab == 2,

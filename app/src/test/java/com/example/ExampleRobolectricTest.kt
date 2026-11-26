@@ -18,6 +18,7 @@ import androidx.compose.ui.test.performScrollToNode
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.example.core.database.MyCareDatabase
+import com.example.core.navigation.MyCareNavHost
 import com.example.core.database.entity.EmergencyContactEntity
 import com.example.core.database.entity.EmergencyProfileEntity
 import com.example.core.database.entity.ExerciseEntity
@@ -54,6 +55,8 @@ import com.example.data.repository.TaskRepository
 import com.example.data.repository.WalletRepository
 import com.example.feature.dashboard.DashboardScreen
 import com.example.feature.dashboard.DashboardViewModel
+import com.example.feature.wallet.WalletScreen
+import com.example.feature.wallet.WalletViewModel
 import com.example.feature.onboarding.LanguageSelectionScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -111,6 +114,13 @@ class ExampleRobolectricTest {
     }
 
     @Test
+    fun mainActivity_launchesOnColdStart() {
+        val activity = Robolectric.buildActivity(MainActivity::class.java).setup()
+        assertEquals(androidx.lifecycle.Lifecycle.State.RESUMED, activity.get().lifecycle.currentState)
+        activity.pause().stop().destroy()
+    }
+
+    @Test
     fun roomDatabase_startsCleanAndPersistsAllModules() = runTest {
         assertTrue(db.medicineDao().getAllMedicinesSync().isEmpty())
         assertTrue(db.taskDao().getAllTasksSync().isEmpty())
@@ -163,6 +173,45 @@ class ExampleRobolectricTest {
         db.emergencyDao().upsertProfile(EmergencyProfileEntity(bloodGroup = "O+"))
         assertEquals(1, db.emergencyDao().observeAllContacts().first().size)
         assertEquals("O+", db.emergencyDao().observeProfile().first()?.bloodGroup)
+    }
+
+    @Test
+    fun roomDatabase_migratesVersionOneToTwoWithoutLosingWalletData() {
+        val dbName = "mycare-migration-${System.nanoTime()}.db"
+        val initial = Room.databaseBuilder(context, MyCareDatabase::class.java, dbName)
+            .allowMainThreadQueries()
+            .build()
+        initial.openHelper.writableDatabase
+        initial.walletDao().insertTransaction(
+            FinanceTransactionEntity(type = "INCOME", title = "Keep during migration", amount = 12.0, category = "Other")
+        )
+        initial.close()
+
+        val oldDb = context.openOrCreateDatabase(dbName, Context.MODE_PRIVATE, null)
+        try {
+            oldDb.execSQL("DROP INDEX IF EXISTS `index_water_intake_records_recordedAtMillis`")
+            oldDb.execSQL("DROP INDEX IF EXISTS `index_sleep_records_bedtimeMillis`")
+            oldDb.execSQL("DROP INDEX IF EXISTS `index_sleep_records_wakeTimeMillis`")
+            oldDb.execSQL("DROP TABLE IF EXISTS `water_intake_records`")
+            oldDb.execSQL("DROP TABLE IF EXISTS `sleep_records`")
+            oldDb.execSQL("PRAGMA user_version = 1")
+        } finally {
+            oldDb.close()
+        }
+
+        val upgraded = Room.databaseBuilder(context, MyCareDatabase::class.java, dbName)
+            .addMigrations(MyCareDatabase.MIGRATION_1_2)
+            .allowMainThreadQueries()
+            .build()
+        try {
+            upgraded.openHelper.writableDatabase
+            assertTrue(upgraded.wellnessDao().getAllWaterIntakesSync().isEmpty())
+            assertTrue(upgraded.wellnessDao().getAllSleepRecordsSync().isEmpty())
+            assertEquals("Keep during migration", upgraded.walletDao().getAllTransactionsSync().single().title)
+        } finally {
+            upgraded.close()
+            context.deleteDatabase(dbName)
+        }
     }
 
     @Test
@@ -274,6 +323,39 @@ class ExampleRobolectricTest {
             composeRule.onNodeWithTag("dashboard_list").performScrollToNode(hasTestTag(tag))
             composeRule.onNodeWithTag(tag).assertIsDisplayed()
         }
+    }
+
+    @Test
+    fun walletScreen_exposesOverviewTransactionsAndCalculatorNavigation() {
+        val viewModel = WalletViewModel(WalletRepository(db.walletDao()))
+        composeRule.setContent {
+            MyCareTheme { WalletScreen(viewModel = viewModel) }
+        }
+        composeRule.waitForIdle()
+
+        composeRule.onNodeWithText("My Wallet").assertIsDisplayed()
+        composeRule.onNodeWithTag("tab_wallet_overview").assertIsDisplayed()
+        composeRule.onNodeWithTag("tab_wallet_transactions").performClick()
+        composeRule.waitForIdle()
+        composeRule.onNodeWithTag("tab_wallet_calculator").performClick()
+        composeRule.waitForIdle()
+        composeRule.onNodeWithTag("tab_wallet_overview").performClick()
+        composeRule.waitForIdle()
+        composeRule.onNodeWithTag("btn_add_income").assertIsDisplayed()
+    }
+
+    @Test
+    fun bottomNavigation_opensMyWalletFeature() {
+        val app = context.applicationContext as MyCareApplication
+        composeRule.setContent {
+            MyCareTheme { MyCareNavHost(container = app.container, isLanguageSelected = true) }
+        }
+        composeRule.waitForIdle()
+
+        composeRule.onNodeWithTag("nav_wallet").performClick()
+        composeRule.waitForIdle()
+        composeRule.onNodeWithText("My Wallet").assertIsDisplayed()
+        composeRule.onNodeWithTag("tab_wallet_overview").assertIsDisplayed()
     }
 
     @Test
